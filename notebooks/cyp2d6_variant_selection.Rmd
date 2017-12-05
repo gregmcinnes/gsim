@@ -1,0 +1,150 @@
+
+# CYP2D6 Exploration
+
+I'm looking for a portion of the CYP2D6 gene to use as a candidate region to simulate data for snp2vec predictions.  I'll look through the annotated variants found in the region in the ExAC dataset and see if anything looks good.  Refer to the notebook in Evernote for a description of what I want.
+
+Setup
+```{r}
+library(reshape2)
+library(ggplot2)
+```
+
+Load the data
+```{r}
+data <- read.table('/Users/gmcinnes/src/gsim/data/cyp2d6_variant_landscape.csv', header=T, stringsAsFactors = F, sep=",")
+```
+
+Add INDEL one-hot encoding
+```{r}
+data$frameshift = 0
+data[data$ExonicFunc.refGene %in% c("frameshift insertion", "frameshift deletion"),]$frameshift = 1
+
+data$indel = 0
+data[data$ExonicFunc.refGene %in% c("frameshift insertion", "frameshift deletion", 'nonframeshift deletion', 'nonframeshift insertion'),]$indel = 1
+```
+
+Subset the data for only the columns I want to look at and melt it.
+```{r}
+sub_data <- data[c('Start', 'ExAC_ALL', 'dann', 'CADD_Phred', 'FATHMM_coding', 'gerp..', 'frameshift', 'indel')]
+
+melted <- melt(sub_data, id=c("Start"))
+melted$variable <- as.character(melted$variable)
+melted$value <- as.numeric(melted$value)
+```
+
+Add in deleterious predictions for each of the methods
+```{r}
+melted$effect = "No effect"
+
+melted$effect <- ifelse(!is.na(melted$variable) & melted$variable == 'dann' & melted$value > 0.975, 'Deleterious', melted$effect)
+melted$effect <- ifelse(!is.na(melted$variable) & melted$variable == 'FATHMM_coding' & melted$value > 0.8, 'Deleterious', melted$effect)
+melted$effect <- ifelse(!is.na(melted$variable) & melted$variable == 'CADD_Phred' & melted$value > 15, 'Deleterious', melted$effect)
+melted$effect <- ifelse(!is.na(melted$variable) & melted$variable == 'gerp..' & melted$value >= 2, 'Deleterious', melted$effect)
+```
+
+
+Now we'll take a look at the scores for each the tools across the gene.
+
+```{r}
+palette1 <- c('#d90057', '#30b4c9')
+```
+
+```{r}
+ggplot(melted) + 
+  geom_point(aes(Start, value, color=effect)) +
+  facet_grid(variable ~ ., scales = "free") +
+  scale_colour_manual(values = palette1)
+```
+
+There's a lot going on here and it's not clear what would make a good region.  
+
+I looked at the [ExAC Browser](http://exac.broadinstitute.org/gene/ENSG00000100197) and for some reason exon 6 jumped out at me. Basically it looks like a small region with only a handful of variants.  There is one LOF splice acceptor mutation in the 3' end of the exon.   
+
+Let's zoom in on it.
+
+```{r}
+exon6 <- melted[melted$Start >= 42524781 & melted$Start < 42524927,]
+```
+
+
+
+```{r}
+ggplot(exon6[exon6$variable %in% c('dann', 'CADD_Phred', 'FATHMM_coding', 'gerp..', 'ExAC_ALL'),]) + 
+  geom_point(aes(Start, value, color=effect), size=3) +
+  facet_grid(variable ~ ., scales = "free") +
+  scale_colour_manual(values = palette1)
+```
+
+This is much more manageable.  I like this.  I see a few deletious variants and a good number of variants not predicted to be deleterious.
+
+I want to look across all scoring methods for the variants that are predicted to be deleterious by any of the tools.  Let's flag those specifically.
+
+```{r}
+candidates <- unique(exon6[exon6$effect == 'Deleterious',]$Start)
+candidates <- candidates[complete.cases(candidates)]
+exon6$candidate <- ifelse(!is.na(exon6$Start) & exon6$Start %in% candidates, 1, 0)
+```
+
+
+And plot it.  I'm switching the color scheme here so that variants predicted to be deleterious by any tool are colored magenta and the shape reflects the prediction for the individual tool.
+
+```{r}
+palette2 <- c('#30b4c9', '#d90057')
+```
+
+```{r}
+ggplot(exon6[exon6$variable %in% c('dann', 'CADD_Phred', 'FATHMM_coding', 'gerp..','ExAC_ALL'),]) + 
+  geom_point(aes(Start, value, shape=effect, color=as.factor(candidate)), size=3) +
+  facet_grid(variable ~ ., scales = "free") +
+  theme_bw() +
+  ggtitle("CYP2D6 - Exon 6 variant landscape") +
+  ylab("Score") +
+  xlab("Chromosome 22 position") +
+  scale_colour_manual(values = palette2)
+```
+
+
+1
+3
+1
+2
+2
+5
+
+
+
+Ok lets take a closer look at these variants. 
+
+- There are 7 of them.  
+- One is predicted to deleterious by all tools
+- 2 are predicted to be deleterious by only 1 tool, and theres 3 others with 2 or 3 delterious predictions
+- They all look very rare, but I do like that there are more common variants in the region 
+- One of them is multiallelic.  Not sure if I like that.  I think i'll drop the less common one and be left with 6.
+
+```{r}
+sub_data[sub_data$Start %in% candidates,]
+```
+
+I'm going to refer to them by their order, so variant 1 is the first one in the list.
+
+Pattern 1: 7 will always cause the phenotypea and will occur in 60% of cases.
+Pattern 2: 28% of cases will be caused by any one of 1 or 2.
+Pattern 3: 2% will be caused by 4.  I expect that snp2vec will outperform other methods correctly predicting whether individuals with this variant have disease.  Even though it is rare in the population, it is deleterious and nearby other deleterious, disease causing variants.
+Pattern 4: 10% of the POPULATION will carry variant 5, but in half of those there is a compensatory variant that protects the carrier of the phenotype, 5p. - Pick this from another exon maybe.  5% of cases
+Pattern 5: 6 is also deleterious but only when a certain other variant is present, 6c. 4% of cases
+Pattern 6: All incidences of LOF variants cause disease.  1% of cases.  Randomly selected.
+
+Maybe some percentage of people with variant 7 have one of the other variants.  They might even have the protective variant, 5p.  Maybe there are some individuals with 6 but not 6c.  
+
+Need to pick a couple linked variants for patterns 4 and 5
+
+I want the pattern 4 variant to be common and on another exon
+```{r}
+melted[melted$variable == "ExAC_ALL" & melted$value > 0.1,]
+```
+
+I'll use 42526694 for pattern 4 and 42523528 for pattern 5
+
+
+
+

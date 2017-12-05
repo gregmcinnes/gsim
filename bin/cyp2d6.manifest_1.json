@@ -1,0 +1,442 @@
+{"phenotype_patterns": {
+    "pattern_1": {
+      "id": "pattern_1",
+      "case_proportion": 0.6,
+      "control_proportion": 0,
+      "protective_variants": null,
+      "type": "phenotype_linked_variant",
+      "variants": {
+        "variant_1": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524857,
+          "pattern_frequency": 1,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "C",
+          "alt": "A",
+          "hom_ref_freq": 0,
+          "het_freq": 0.5,
+          "hom_alt_freq": 0.5
+        }
+      }
+    },
+    "pattern_2": {
+      "id": "pattern_2",
+      "case_proportion": 0.28,
+      "control_proportion": 0,
+      "protective_variants": null,
+      "type": "phenotype_linked_variant",
+      "variants": {
+        "variant_1": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524796,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "A",
+          "alt": "G",
+          "hom_ref_freq": 0,
+          "het_freq": 0.3,
+          "hom_alt_freq": 0.7
+        },
+        "variant_2": {
+          "id": "variant_2",
+          "chromosome": "22",
+          "position": 42524802,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "A",
+          "hom_ref_freq": 0,
+          "het_freq": 0.7,
+          "hom_alt_freq": 0.3
+        }
+      }
+    },
+    "pattern_3": {
+      "id": "pattern_1",
+      "case_proportion": 0.02,
+      "control_proportion": 0,
+      "protective_variants": null,
+      "type": "phenotype_linked_variant",
+      "variants": {
+        "variant_1": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524806,
+          "pattern_frequency": 1,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "C",
+          "alt": "T",
+          "hom_ref_freq": 0,
+          "het_freq": 0.1,
+          "hom_alt_freq": 0.9
+        }
+      }
+    },
+    "pattern_4": {
+      "id": "pattern_4",
+      "case_proportion": 0.05,
+      "control_proportion": 0.05,
+      "type": "phenotype_variant_with_protective_SNV",
+      "protective_variants": ["22-42526694-G-A"],
+      "variants": {
+        "variant_1": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524814,
+          "pattern_frequency": 1,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "A",
+          "alt": "G",
+          "hom_ref_freq": 0,
+          "het_freq": 0.5,
+          "hom_alt_freq": 0.5
+        },
+        "variant_2": {
+          "id": "variant_2",
+          "chromosome": "22",
+          "position": 42526694,
+          "pattern_frequency": 0.5,
+          "case_frequency": 0,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "A",
+          "hom_ref_freq": 0,
+          "het_freq": 0.2,
+          "hom_alt_freq": 0.8
+        }
+      }
+    },
+    "pattern_5": {
+      "id": "pattern_5",
+      "case_proportion": 0.04,
+      "protective_variants": ["22-42523528-C-T"],
+      "control_proportion": 0.03,
+      "type": "synergistic_phenotype_linked",
+      "variants": {
+        "variant_1": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524829,
+          "pattern_frequency": 0.5,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "A",
+          "alt": "G",
+          "hom_ref_freq": 0,
+          "het_freq": 0.5,
+          "hom_alt_freq": 0.5
+        },
+        "variant_2": {
+          "id": "variant_2",
+          "chromosome": "22",
+          "position": 42523528,
+          "pattern_frequency": 0.5,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "C",
+          "alt": "T",
+          "hom_ref_freq": 0,
+          "het_freq": 0.5,
+          "hom_alt_freq": 0.5
+        }
+      }
+    },
+    "pattern_6": {
+      "id": "pattern_6",
+      "case_proportion": 0.01,
+      "control_proportion": 0,
+      "variant_class": "lof",
+      "protective_variants": null,
+      "type": "phenotype_linked_variant",
+      "variants": {
+        "variant_1": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42522917,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "G",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_2": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42522921,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "T",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_3": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42523532,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "-",
+          "alt": "CA",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_4": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42523574,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "A",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_5": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42523592,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "A",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_6": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42523897,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "T",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_8": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42523941,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "T",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_9": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524202,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "-",
+          "alt": "A",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_10": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524213,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "-",
+          "alt": "G",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_11a": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524214,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_11b": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524214,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "A",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_12": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524217,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "-",
+          "alt": "GGGCT",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_13": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524244,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "T",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_14": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524251,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "AGTT",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_15": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42524802,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "T",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_17": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42525035,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "C",
+          "alt": "A",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_18": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42525084,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "C",
+          "alt": "T",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_19": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42525086,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "A",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_20": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42525168,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "A",
+          "alt": "C",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_21": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42525862,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "INDEL",
+          "ref": "G",
+          "alt": "-",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        },
+        "variant_22": {
+          "id": "variant_1",
+          "chromosome": "22",
+          "position": 42526640,
+          "pattern_frequency": null,
+          "case_frequency": 1,
+          "class": "SNV",
+          "ref": "G",
+          "alt": "A",
+          "hom_ref_freq": null,
+          "het_freq": null,
+          "hom_alt_freq": null
+        }
+      }
+    }
+  },
+  "regions":{
+    "region_1": {
+      "chromosome": "22",
+      "start": 42522550,
+      "end": 42526839
+    }
+  }
+}
